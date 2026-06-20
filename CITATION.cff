@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-title: "Restart Posterior Sampling (RePS)"
+title: "Solving Diffusion Inverse Problems with Restart Posterior Sampling"
 message: "If you use this software, please cite both the repository and the associated paper."
 type: software
 
