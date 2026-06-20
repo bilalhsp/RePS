@@ -1,0 +1,8 @@
+name: daps
+sampler_config:
+  n_anneal_steps: 200
+  n_ode_steps: 5
+  sigma_max: 100
+  sigma_min: 0.1
+  ode_sigma_min: 0.01
+  rho: 7

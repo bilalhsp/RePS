@@ -1,0 +1,28 @@
+task_name: motion_deblur
+task_config:
+  operator_config:
+    name: motion_blur
+    kernel_size: 61
+    intensity: 0.5
+    sigma: 0.05
+
+pixel:
+  sampler_config:  
+    n_restarts: 100
+    n_ode_steps: 10
+    
+    lr: 2e-2 
+    lam: 0.9
+    num_iters: 10
+    sigma_restart: 2 #1.0
+
+ldm:
+  sampler_config:  
+    n_restarts: 50
+    n_ode_steps: 5
+    
+    lr: 0.09
+    lam: 0.004
+    num_iters: 10
+    # sigma_restart: 2 #1.0
+

@@ -1,0 +1,28 @@
+task_name: inpaint_box
+task_config:
+  operator_config:
+    name: inpainting
+    mask_type: box
+    mask_len_range: [128, 129]
+    resolution: 256
+    sigma: 0.05
+
+pixel:
+  sampler_config:  
+    n_restarts: 100
+    n_ode_steps: 10
+
+    lr: 4.8e-2
+    lam: 4.14
+    num_iters: 20
+    sigma_restart: 50 
+
+ldm:
+  sampler_config:  
+    n_restarts: 50
+    n_ode_steps: 5
+
+    lr: 0.020
+    lam: 0.025
+    num_iters: 20
+    # sigma_restart: 50 

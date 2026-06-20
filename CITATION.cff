@@ -1,0 +1,29 @@
+```yaml
+cff-version: 1.2.0
+title: "Restart Posterior Sampling (RePS)"
+message: "If you use this software, please cite both the repository and the associated paper."
+type: software
+
+authors:
+  - family-names: Ahmed
+    given-names: Bilal
+  - family-names: Makin
+    given-names: Joseph G.
+
+repository-code: "https://github.com/bilalhsp/reps"
+license: MIT
+
+preferred-citation:
+  type: conference-paper
+  authors:
+    - family-names: Ahmed
+      given-names: Bilal
+    - family-names: Makin
+      given-names: Joseph G.
+  title: "Solving Diffusion Inverse Problems with Restart Posterior Sampling"
+  conference:
+    name: "European Conference on Computer Vision"
+    acronym: "ECCV"
+  year: 2026
+  url: "https://arxiv.org/abs/2511.20705"
+```

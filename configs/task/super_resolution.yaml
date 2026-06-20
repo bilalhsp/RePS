@@ -1,0 +1,27 @@
+task_name: super_resolution
+task_config:
+  operator_config:
+    name: down_sampling
+    resolution: 256
+    scale_factor: 4
+    sigma: 0.05
+
+pixel:
+  sampler_config:  
+    n_restarts: 100
+    n_ode_steps: 10
+
+    lr: 1.18e-3
+    lam: 11.60
+    num_iters: 20
+    sigma_restart: 10
+
+ldm:
+  sampler_config:  
+    n_restarts: 50
+    n_ode_steps: 5
+
+    lr: 0.17
+    lam: 0.06
+    num_iters: 10
+    # sigma_restart: 10 

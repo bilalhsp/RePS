@@ -1,0 +1,25 @@
+defaults:
+  - task: super_resolution
+  - data: test-ffhq
+  - model: ffhq
+  - sampler: reps
+
+
+seed: 42
+num_runs: 1
+batch_size: 25
+wandb: True
+eval_fid: True
+save_samples: True
+task_group: pixel # or ldm
+project_name: reps
+eval_fn_list: ['psnr', 'ssim', 'lpips']
+output_root_dir: /scratch/gilbreth/ahmedb/inverse_problems/
+
+hydra:
+  run:
+    dir: ${output_root_dir}
+
+
+
+

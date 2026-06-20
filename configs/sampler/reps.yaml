@@ -1,0 +1,8 @@
+name: reps
+sampler_config:
+  sigma_max: 100
+  sigma_min: 0.1    # temporarily set to 0.01 for testing, should be 0.1
+  rho: 15            # temporarily set to 7 for testing, should be 15
+  ode_sigma_min: 0.01
+  ode_rho: 7 
+    

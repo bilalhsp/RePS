@@ -1,0 +1,38 @@
+task_name: cf_gaussian_deblur
+task_config:
+  operator_config:
+      name: cf_gaussian_blur
+      kernel_size: 61
+      intensity: 3.0
+      sigma: 0.05
+
+pixel:
+  sampler_config:  
+    n_restarts: 100
+    n_ode_steps: 10
+    
+    sigma_restart: 50 # 10 #41.64
+
+ldm:
+  sampler_config:  
+    n_restarts: 50
+    n_ode_steps: 5
+    
+    lr: 0.08
+    lam: 0.001
+    num_iters: 10
+    # sigma_restart: 50 # 10 #41.64
+
+
+# demo-ffhq...
+# Fine tuning ffhq...psnr
+# sweep_id: irgn1n4f
+# sweep best: 27.85
+# n_restarts=50, n_ode_steps=5, 
+# num_iters=10, sigma_restart=80
+# parameters tuned: lr, lam
+    # lr: 0.08
+    # lam: 0.001
+# n_ode_steps=5... 
+# n_anneal_steps=50, : 
+    

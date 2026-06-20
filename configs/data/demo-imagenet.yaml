@@ -1,0 +1,5 @@
+name: demo-imagenet
+data_dir: /home/ahmedb/projects/predictor-corrector/dataset/demo-imagenet
+resolution: 256
+start_idx: 0
+end_idx: 10

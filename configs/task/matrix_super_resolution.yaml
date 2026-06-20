@@ -1,0 +1,15 @@
+task_name: matrix_super_resolution
+task_config:
+  operator_config:
+    name: matrix_down_sampling
+    resolution: 256
+    scale_factor: 4
+    sigma: 0.05
+
+pixel:
+  sampler_config:  
+    n_restarts: 100
+    n_ode_steps: 10
+    
+    sigma_restart: 10 
+

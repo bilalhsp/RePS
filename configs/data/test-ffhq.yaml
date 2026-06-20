@@ -1,0 +1,5 @@
+name: test-ffhq
+data_dir: /scratch/gilbreth/ahmedb/inverse_problems/datasets/test-ffhq
+resolution: 256
+start_idx: 0
+end_idx: 100

@@ -1,0 +1,28 @@
+task_name: inpaint_random
+task_config:
+  operator_config:
+    name: inpainting
+    mask_type: random  
+    mask_prob_range: [ 0.70, 0.71 ]  # for random
+    resolution: 256
+    sigma: 0.05
+
+pixel:
+  sampler_config:  
+    n_restarts: 100
+    n_ode_steps: 10
+
+    lr: 1.1e-2 
+    lam: 2.7 
+    num_iters: 10
+    sigma_restart: 2 #1.44 
+    
+ldm:
+  sampler_config:  
+    n_restarts: 50
+    n_ode_steps: 5
+
+    lr: 0.14
+    lam: 0.01 
+    num_iters: 10
+    # sigma_restart: 2 #1.44 

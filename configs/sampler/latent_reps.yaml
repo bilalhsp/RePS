@@ -1,0 +1,9 @@
+name: reps
+latent: True
+sampler_config:
+  sigma_max: 100
+  sigma_min: 0.1
+  rho: 15
+  ode_sigma_min: 0.01
+  ode_rho: 7 
+    

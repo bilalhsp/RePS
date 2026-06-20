@@ -1,0 +1,27 @@
+task_name: hdr
+task_config:
+  operator_config:
+    name: high_dynamic_range
+    scale: 2
+    sigma: 0.05
+
+pixel:
+  sampler_config:  
+    n_restarts: 400
+    n_ode_steps: 10
+
+    lr: 3e-2
+    lam: 5
+    num_iters: 20
+    sigma_restart: 25 
+
+ldm:
+  sampler_config:  
+    n_restarts: 100
+    n_ode_steps: 10
+
+    lr: 0.010
+    lam: 0.005
+    num_iters: 20
+    # sigma_restart: 20 #22.03
+

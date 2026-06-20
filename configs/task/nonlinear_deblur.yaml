@@ -1,0 +1,27 @@
+task_name: nonlinear_deblur
+task_config:
+  operator_config:
+    name: nonlinear_blur
+    opt_yml_path: /home/ahmedb/projects/predictor-corrector/predictor_corrector/forward_operator/bkse/options/generate_blur/default.yml
+    sigma: 0.05
+
+pixel:
+  sampler_config: 
+    n_restarts: 400  
+    n_ode_steps: 10
+
+    lr: 6.3e-3
+    lam: 2.42
+    num_iters: 20
+    sigma_restart: 25
+
+ldm:
+  sampler_config: 
+    n_restarts: 100  
+    n_ode_steps: 10
+
+    lr: 0.06
+    lam: 0.014
+    num_iters: 20
+    # sigma_restart: 25
+
