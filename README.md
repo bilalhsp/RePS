@@ -1,78 +1,73 @@
 # Restart Posterior Sampling (RePS)
 
-This repository accompanies the paper [Solving Diffusion Inverse Problems with Restart Posterior Sampling](https://arxiv.org/abs/2511.20705). It provides Hydra-based sampling pipelines for image inverse problems, including pixel-space and latent-space settings, and implements Restart Posterior Sampling (RePS) for generating posterior samples from diffusion models.
+[![Project Page](https://img.shields.io/badge/Project-Page-176b87)](https://bilalhsp.github.io/RePS/)
+[![arXiv](https://img.shields.io/badge/arXiv-2511.20705-b31b1b)](https://arxiv.org/abs/2511.20705)
 
-## What is included
+Official code for **Solving Diffusion Inverse Problems with Restart Posterior Sampling**. RePS is a posterior sampler for diffusion inverse problems: it alternates short measurement-conditioned ODE trajectories with restart noise injections, producing diverse posterior samples without backpropagating through the score network. See the [project page](https://bilalhsp.github.io/RePS/) for figures and a method overview.
 
-- `sampling.py`: the main entrypoint for running posterior sampling experiments.
-- `configs/`: Hydra configuration files for datasets, models, samplers, and tasks.
-- `diffusion/`: diffusion and sampler implementations.
-- `forward_operator/`: measurement operators for inverse problems.
-- `model/`: pretrained model loading and model wrappers.
-- `evals/`: metrics and evaluation utilities.
+## Code Overview
 
-## Requirements
+- `sampling.py`: Hydra entrypoint for running RePS and baseline posterior sampling experiments.
+- `diffusion/reps.py`: Restart Posterior Sampling implementation.
+- `configs/sampler/reps.yaml`: pixel-space RePS sampler configuration.
+- `configs/sampler/latent_reps.yaml`: latent-space RePS sampler configuration.
+- `configs/task/`: inverse-problem definitions, including super-resolution, inpainting, deblurring, HDR, phase retrieval, and nonlinear deblurring.
+- `forward_operator/`: measurement operators used by the inverse-problem tasks.
+- `evals/`: PSNR, SSIM, LPIPS, and FID evaluation utilities.
 
-This codebase is designed for a Python environment with PyTorch and the usual scientific stack installed. A typical setup includes:
+## Running RePS
 
-- Python 3.9 or newer
-- PyTorch with CUDA support if you plan to run on GPU
-- Hydra
-- OmegaConf
-- NumPy
-- Pillow
-- torchvision
-- wandb
-- PyYAML
-- python-dotenv
-- setproctitle
-
-Create and activate your preferred virtual environment, then install the project dependencies used by your environment.
-
-## Running sampling
-
-The main entrypoint is [sampling.py](sampling.py). You can run it directly with Hydra overrides:
+The default configuration runs pixel-space RePS on FFHQ. Override Hydra fields to select the dataset, model, sampler, and inverse problem.
 
 ```bash
 python sampling.py \
-	sampler=reps \
-	task_group=pixel \
-	data=test-ffhq \
-	model=ffhq \
-	task=matrix_super_resolution
+  sampler=reps \
+  task_group=pixel \
+  data=test-ffhq \
+  model=ffhq \
+  task=matrix_super_resolution
 ```
 
-For a latent-space run, switch the task group and model accordingly:
+For latent-space RePS, use the latent sampler and LDM task group:
 
 ```bash
 python sampling.py \
-	sampler=latent_reps \
-	task_group=ldm \
-	data=test-ffhq \
-	model=ffhqldm \
-	task=inpaint_box
+  sampler=latent_reps \
+  task_group=ldm \
+  data=test-ffhq \
+  model=ffhqldm \
+  task=inpaint_box
 ```
 
-You can override sampler settings on the command line as needed, for example:
+Useful experiment overrides:
 
 ```bash
 python sampling.py \
-	sampler=reps \
-	task_group=pixel \
-	data=test-ffhq \
-	model=ffhq \
-	task=matrix_super_resolution \
-	num_runs=10 \
-	batch_size=25 \
-	save_samples=True \
-	eval_fid=True
+  sampler=reps \
+  task_group=pixel \
+  data=test-imagenet \
+  model=imagenet \
+  task=motion_deblur \
+  num_runs=4 \
+  batch_size=25 \
+  save_samples=True \
+  eval_fid=True
 ```
 
-## Reproducibility notes
+Outputs are written under `output_root_dir` from `configs/default.yaml`; override it on the command line for your machine:
 
-- The code seeds NumPy and PyTorch at the start of each run.
-- `wandb` logging can be enabled or disabled with the `wandb` config flag.
-- The main sampling script prints the resolved Hydra config at runtime, which makes it easier to reproduce a run later.
+```bash
+python sampling.py output_root_dir=/path/to/outputs
+```
+
+## Supported Tasks
+
+Configured tasks include:
+
+- Linear inverse problems: `super_resolution`, `matrix_super_resolution`, `inpaint_box`, `inpaint_random`, `gaussian_deblur`, `motion_deblur`
+- Nonlinear inverse problems: `phase_retrieval`, `nonlinear_deblur`, `hdr`
+
+The repository also includes DAPS configuration support via `configs/sampler/daps.yaml` for comparisons.
 
 ## Citation
 
@@ -84,13 +79,13 @@ If you use this code in your work, please cite:
   author    = {Ahmed, Bilal and Makin, Joseph G.},
   booktitle = {European Conference on Computer Vision (ECCV)},
   year      = {2026},
-  url        = {https://arxiv.org/abs/2511.20705}
+  url       = {https://arxiv.org/abs/2511.20705}
 }
 ```
 
 ## Attribution
 
-This repository was inspired by and is based on the following projects:
+This repository builds on code and ideas from:
 
 - [DAPS](https://github.com/zhangbingliang2019/DAPS)
 - [DPS](https://github.com/dps2022/diffusion-posterior-sampling)
