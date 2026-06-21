@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Solving Diffusion Inverse Problems with Restart Posterior Sampling",
+    "section": "",
+    "text": "Bilal Ahmed, Joseph G. Makin\n\n\nPurdue University\n\n\nECCV-2026\n\n\n χ arXiv    Code"
+  },
+  {
+    "objectID": "index.html#abstract",
+    "href": "index.html#abstract",
+    "title": "Solving Diffusion Inverse Problems with Restart Posterior Sampling",
+    "section": "Abstract",
+    "text": "Abstract\nInverse problems are fundamental to science and engineering, where the goal is to infer an underlying signal or state from incomplete or noisy measurements. Recent approaches employ diffusion models as powerful implicit priors for such problems, owing to their ability to capture complex data distributions. However, existing diffusion-based methods for inverse problems often rely on strong approximations of the posterior distribution, require computationally expensive gradient backpropagation through the score network, or are restricted to linear measurement models.\nIn this work, we propose Restart for Posterior Sampling (RePS), a general and efficient framework for solving both linear and non-linear inverse problems using pre-trained diffusion models. RePS builds on the idea of restart-based sampling, previously shown to improve sample quality in unconditional diffusion, and extends it to posterior inference. Our method employs a conditioned ODE applicable to any differentiable measurement model and introduces a simplified restart strategy that contracts accumulated approximation errors during sampling. Unlike some of the prior approaches, RePS avoids backpropagation through the score network, substantially reducing computational cost.\nWe demonstrate that RePS achieves faster convergence and superior reconstruction quality compared to existing diffusion-based baselines across a range of inverse problems, including both linear and non-linear settings."
+  },
+  {
+    "objectID": "index.html#method",
+    "href": "index.html#method",
+    "title": "Solving Diffusion Inverse Problems with Restart Posterior Sampling",
+    "section": "Method",
+    "text": "Method\nRePS solves inverse problems by turning a pretrained diffusion model into a measurement-conditioned ODE sampler. At each ODE step, the diffusion model first predicts the clean image implied by the current noisy state; RePS then refines this prediction by solving a small MAP problem that balances measurement consistency with the diffusion prior. Because this conditioning is performed in image space, the method works with any differentiable measurement operator and avoids backpropagating through the score network. Rather than integrating the conditioned ODE once from high noise to low noise, RePS repeatedly runs short ODE trajectories down to the near-clean regime, then restarts by adding noise at an annealed restart level. These restart steps contract accumulated approximation error while preserving the fast convergence of deterministic ODE sampling.\n\n\n\n\nSchematic overview of the RePS sampling procedure."
+  },
+  {
+    "objectID": "index.html#results",
+    "href": "index.html#results",
+    "title": "Solving Diffusion Inverse Problems with Restart Posterior Sampling",
+    "section": "Results",
+    "text": "Results\n\n\n\n\nQualitative results for Restart Posterior Sampling across inverse problem settings.\n\n\n\n\n\nTable 1. Results on linear inverse problems for the FFHQ and ImageNet datasets.\n\n\n\n\n\nTable 2. Results on nonlinear inverse problems for the FFHQ and ImageNet datasets.\n\nRePS generates high-fidelity samples and converges faster than strong diffusion inverse-problem baselines. The left panel compares RePS with DAPS, a recent state-of-the-art posterior sampling method, on motion deblurring; RePS reaches better reconstruction quality across neural function evaluation budgets, as measured by higher PSNR and lower LPIPS. The right panel compares per-image sampling time for RePS and DAPS across all eight FFHQ inverse-problem tasks.\n\n\n\n\n\n\n\n\n\nComparison with DAPS and runtime behavior.\n\n\nDiversity of Samples\nRePS is a posterior sampler, so it is designed to draw plausible reconstructions from the posterior distribution rather than return only a single MAP estimate. This distinction is especially important for inherently multimodal inverse problems, such as box inpainting and phase retrieval, where multiple clean images can be consistent with the same measurement. The examples below show four independent samples for each task, illustrating that RePS preserves meaningful sample diversity while remaining measurement-consistent.\n\n\n\n\nSample diversity across multiple RePS runs."
+  },
+  {
+    "objectID": "index.html#citation",
+    "href": "index.html#citation",
+    "title": "Solving Diffusion Inverse Problems with Restart Posterior Sampling",
+    "section": "Citation",
+    "text": "Citation\n@inproceedings{ahmed2026reps,\n  title     = {Solving Diffusion Inverse Problems with Restart Posterior Sampling},\n  author    = {Ahmed, Bilal and Makin, Joseph G.},\n  booktitle = {European Conference on Computer Vision (ECCV)},\n  year      = {2026},\n  url        = {https://arxiv.org/abs/2511.20705}\n}"
+  }
+]
