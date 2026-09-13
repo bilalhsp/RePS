@@ -78,6 +78,10 @@ body {
   margin-top: 26px;
 }
 
+.action-row > .poster-link {
+  order: 3;
+}
+
 .paper-link {
   display: inline-flex;
   align-items: center;
