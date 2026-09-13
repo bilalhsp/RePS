@@ -82,6 +82,10 @@ body {
   order: 3;
 }
 
+.action-row > p {
+  display: contents;
+}
+
 .paper-link {
   display: inline-flex;
   align-items: center;
